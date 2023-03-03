@@ -43,8 +43,8 @@ class Voiture {
                                 <td>${voiture.placeNumber}</td>
                                 <td>${voiture.price}</td>
                                 <td>
-                                    <a class="btn btn-outline-warning edit" id="edit-data" data-id="${voiture.id}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a class="btn btn-outline-danger delete" data-id="${voiture.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
+                                    <a class="btn btn-outline-warning btn-sm edit" id="edit-data" data-id="${voiture.id}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a class="btn btn-outline-danger btn-sm delete" data-id="${voiture.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>`;
                     });

@@ -20,6 +20,33 @@
 <body>
     <div class="container">
 
+
+
+        <!-- Modal -->
+            <!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+        <!-- Fin Modal -->
+
+
         <div class="container title">
             <h2 align="center">... Commande ...</h2>
         </div>
@@ -29,16 +56,27 @@
             
             <div class="col-md-10 offset-1 my-5">
                 <input class="form-control me-2" type="search" placeholder="Recherche ..." aria-label="Search" id="searchInput">
-                <table class="table table-hover text-center" id="tableVoiture">
-                    <thead class="bg-dark text-white">
+                <table class="table table-hover text-center" id="tableCommande">
+                    <thead>
+                        <tr>
+                            <th>
+                                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                  </button>
+                            </th>
+                            <th colspan="2" class="bg-info text-white">Client</th>
+                            <th colspan="5" class="bg-dark text-white">Voiture</th>
+                            <th rowspan="2">Action</th>
+                        </tr>
                         <tr>
                             <th>ID</th>
-                            <th>Matricule</th>
+                            <th>Nom Client</th>
+                            <th>Tél Client</th>
                             <th>Marque</th>
+                            <th>Matricule</th>
                             <th>Type</th>
                             <th>Nombre de places</th>
                             <th>Prix</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

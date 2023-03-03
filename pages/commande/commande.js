@@ -23,12 +23,54 @@ class Commande {
         }
       }
 
+      getCommandeList() {
+        $.ajax({
+          type : "GET",
+          url : "http://localhost:8888/api/commandes/all",
+          dataType : "json",
+          success: (results) => {
+            let row = ""
+            console.log(results.message);
+            console.log(results.object);
+            $.each(results.object, (index, commande) => {
+              row += 
+                `
+                  <tr>
+                    <th>${commande.id}</th>
+                    <th>${commande.nomCli}</th>
+                    <td>${commande.numCli}</td>
+                    <td>${commande.matriculeVoiture}</td>
+                    <td>${commande.marqueVoiture}</td>
+                    <td>${commande.typeVoiture}</td>
+                    <td>${commande.nbPlaceVoiture}</td>
+                    <td>${commande.priceVoiture}</td>
+                    <td>
+                        <a class="btn btn-outline-warning edit" id="edit-data" data-id="${commande.id}"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="btn btn-outline-danger delete" data-id="${commande.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                `;
+            });
+            $("#tableCommande tbody").html(row);
+            $('.table').DataTable();
+          },
+          error:(error) => {
+            console.log(error);
+          }
+        });
+      }
+
+      addCommande() {
+        let 
+      }
+
 
 }
 
 
 $(function () {
     const commande = new Commande();
+    commande.getCommandeList();
 
     $("#searchInput").on("keyup", (e) => {
         e.preventDefault();
