@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion de vente de voiture</title>
+
+    <!-- <link rel="stylesheet" href="../../script/bootstrap.min.css">
+    <link rel="stylesheet" href="../../scripts/static/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../script/sc/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../script/all.min.css"> -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-eHx4nbBTkIr2i0m9SANm/cczPESd0DUEcfl84JpIuutE6oDxPhXvskMR08Wmvmfx5wUpVjlWdi82G5YLvqqJdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container">
+
+        <div class="container title">
+            <h2 align="center">Voiture</h2>
+        </div>
+
+        <div class="col-md-12 offset-3 m-auto my-5 shadow-lg">
+            <h3 class="text-center pt-4 text-info" id="text-k">Enregistrer une nouvelle voiture</h3>
+            
+            <div class="col-md-10 offset-1 my-5">
+                <input class="form-control me-2" type="search" placeholder="Recherche ..." aria-label="Search" id="searchInput">
+                <table class="table table-hover text-center" id="tableVoiture">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th>ID</th>
+                            <th>Matricule</th>
+                            <th>Marque</th>
+                            <th>Type</th>
+                            <th>Nombre de places</th>
+                            <th>Prix</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <form role="form" id="form-ajout-car" method="post">
+                                <th></th>
+                                <th>
+                                    <input type="text" name="matricule" id="matricule" class="form-control" placeholder="Matricule ..." required>
+                                </th>
+                                <th>
+                                    <input type="text" name="mark" id="mark" class="form-control"
+                                        placeholder="Marque..." required>
+                                </th>
+                                <th>
+                                    <input type="text" name="type" id="type" class="form-control"
+                                        placeholder="Type..." required>
+                                </th>
+                                <th>
+                                    <input type="number" name="placeNumber" id="placeNumber" class="form-control"
+                                        placeholder="Nombre de place ..." required>
+                                </th>
+                                <th>
+                                    <input type="number" name="price" id="price" class="form-control"
+                                        placeholder="Prix ..." required>
+                                </th>
+                                <th>
+                                    <input type="hidden" id="idCar" name="idCar" />
+                                    <button type="submit" id="btn-add-car" class="btn btn-outline-warning mx-2 my-1">ENREGISTRER</button>
+                                    <button type="reset" class="btn btn-outline-info mx-2 my-1" id="btn-modifier">MODIFIER</button>
+                                </th>
+                            </form>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+    
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- <script src="../../script/sc/jquery-3.6.0.min.js"></script>
+    <script src="../../script/sc/jquery.dataTables.min.js"></script>
+    <script src="../../script/popper.min.js"></script>
+    <script src="../../script/bootstrap.min.js"></script> -->
+    <script src="../../script/sweetalert2.all.min.js"></script>
+    <script src="voiture.js"></script>
+</body>
+</html>
