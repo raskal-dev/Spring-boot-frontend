@@ -43,6 +43,7 @@ class Voiture {
                                 <td>${voiture.placeNumber}</td>
                                 <td>${voiture.price}</td>
                                 <td>
+                                    <a class="btn btn-outline-primary btn-sm buy" data-bs-toggle="modal" data-bs-target="#exampleModal" id="buy-data" data-id="${voiture.id}"><i class="fa-solid fa-cart-plus"></i></i></a>
                                     <a class="btn btn-outline-warning btn-sm edit" id="edit-data" data-id="${voiture.id}"><i class="fa-regular fa-pen-to-square"></i></a>
                                     <a class="btn btn-outline-danger btn-sm delete" data-id="${voiture.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
                                 </td>
@@ -63,7 +64,7 @@ class Voiture {
         var matricule = $("#matricule").val()
         var mark = $("#mark").val()
         var type = $("#type").val()
-        var placeNumber = $("#placeNumber").val()
+        let placeNumber = $("#placeNumber").val()
         var price = $("#price").val()
         
         $.ajax({
@@ -119,6 +120,32 @@ class Voiture {
         })
     }
 
+    migrateDataCommande() {
+        $("body").on("click","#buy-data", function(event) {
+            $("#form-ajout-car")[0].reset()
+            $("#form-ajout-commande")[0].reset()
+            var id = $(this).attr("data-id")
+            console.log("DATA-ID : "+id)
+            $.ajax({
+                type:"GET",
+                contentType:"application/json;charset=utf-8",
+                url:`http://localhost:8888/api/voitures/byId/${id}`,
+                success:(response) => {
+                    console.log(response.object)
+                    $("#matriculeVoiture").val(response.object.matricule)
+                    $("#marqueVoiture").val(response.object.mark)
+                    $("#typeVoiture").val(response.object.type)
+                    $("#nbPlaceVoiture").val(response.object.placeNumber)
+                    $("#priceVoiture").val(response.object.price)
+                },
+                error:(err) => {
+                    console.log(err)
+                    Swal.fire("Ouupss !!","Veuillez réessayer s'il vous plait !!","error")
+                }
+            })
+        })
+    }
+
     updateData(data_k, idCar) {
         
         $.ajax({
@@ -134,6 +161,28 @@ class Voiture {
                 $("#btn-add-car").show()
                 this.getVoitureList()
                 $("#form-ajout-car")[0].reset();
+            },
+            error:(err) => {
+                console.log("ERROR : "+err)
+                Swal.fire("Ouupss !!","Veuillez réessayer s'il vous plait !!","error")
+            }
+        })   
+    }
+
+    addCommande(data_commande) {
+        
+        $.ajax({
+            type:"POST",
+            contentType:"application/json;charset=utf-8",
+            url:"http://localhost:8888/api/commandes/save",
+            data: JSON.stringify(data_commande),
+            dataType:"json",
+            success:(response) => {
+                console.log("RESPONSE : "+response)
+                Swal.fire("Petite alerte !!","Commande avec succès !!","success")
+                this.getVoitureList();
+                $("#form-ajout-commande")[0].reset();
+                $(".modal").hide();
             },
             error:(err) => {
                 console.log("ERROR : "+err)
@@ -185,7 +234,7 @@ class Voiture {
         };
         xhttp.open("GET", url, true);
         xhttp.send();
-        }
+    }
 
 }
 
@@ -215,12 +264,27 @@ $(function () {
         voiture.updateData(dataForm, idC)
     })
 
+    $("#btn-buy").on("click",(event) => {
+        event.preventDefault()
+        var dataFormCom = {        
+            nomCli: $("#nomCli").val(),
+            numCli: $("#numCli").val(),
+            matriculeVoiture: $("#matriculeVoiture").val(),
+            marqueVoiture: $("#marqueVoiture").val(),
+            typeVoiture:$("#typeVoiture").val(),
+            nbPlaceVoiture: $("#nbPlaceVoiture").val(),
+            priceVoiture: $("#priceVoiture").val()
+        }
+        voiture.addCommande(dataFormCom);
+    })
+
     $('#form-ajout-car').on("submit", (event) => {
         event.preventDefault()
         voiture.addVoitrure();
     })
 
     voiture.migrateData();
+    voiture.migrateDataCommande();
     voiture.deleteData();
 
 })
