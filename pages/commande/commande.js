@@ -45,8 +45,7 @@ class Commande {
                     <td>${commande.nbPlaceVoiture}</td>
                     <td>${commande.priceVoiture}</td>
                     <td>
-                        <a class="btn btn-outline-warning edit" id="edit-data" data-id="${commande.id}"><i class="fa-regular fa-pen-to-square"></i></a>
-                        <a class="btn btn-outline-danger delete" data-id="${commande.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
+                        <a class="btn btn-outline-info info" id="info-data" data-id="${commande.id}"><i class="fa-solid fa-file-export"></i></a>
                     </td>
                   </tr>
                 `;

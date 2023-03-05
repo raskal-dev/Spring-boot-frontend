@@ -179,10 +179,11 @@ class Voiture {
             dataType:"json",
             success:(response) => {
                 console.log("RESPONSE : "+response)
-                Swal.fire("Petite alerte !!","Commande avec succès !!","success")
+                Swal.fire("Petite alerte !!","Commande avec succès !!","success").then(() => {
+                    window.location.reload()    
+                })
                 this.getVoitureList();
                 $("#form-ajout-commande")[0].reset();
-                $(".modal").hide();
             },
             error:(err) => {
                 console.log("ERROR : "+err)
