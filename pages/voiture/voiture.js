@@ -43,9 +43,9 @@ class Voiture {
                                 <td class="align-middle">${voiture.placeNumber}</td>
                                 <td class="align-middle">${voiture.price}</td>
                                 <td class="align-middle">
-                                    <a class="btn btn-outline-primary buy" data-bs-toggle="modal" data-bs-target="#exampleModal" id="buy-data" data-id="${voiture.id}"><i class="fa-solid fa-cart-plus"></i></a>
-                                    <a class="btn btn-outline-warning edit" id="edit-data" data-id="${voiture.id}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a class="btn btn-outline-danger delete" data-id="${voiture.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
+                                    <a class="btn btn-outline-primary buy" style="font-size: 0.8rem;" data-bs-toggle="modal" data-bs-target="#exampleModal" id="buy-data" data-id="${voiture.id}"><i class="fa-solid fa-cart-plus"></i></a>
+                                    <a class="btn btn-outline-warning edit" style="font-size: 0.8rem;" id="edit-data" data-id="${voiture.id}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a class="btn btn-outline-danger delete" style="font-size: 0.8rem;" data-id="${voiture.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>`;
                     });
