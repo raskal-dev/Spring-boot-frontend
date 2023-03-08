@@ -45,7 +45,7 @@ class Commande {
                     <td>${commande.nbPlaceVoiture}</td>
                     <td>${commande.priceVoiture}</td>
                     <td>
-                        <a class="btn btn-outline-info info" id="info-data" data-id="${commande.id}"><i class="fa-solid fa-file-export"></i></a>
+                        <a class="btn btn-outline-info export" id="export-data" data-id="${commande.id}"><i class="fa-solid fa-file-export"></i></a>
                     </td>
                   </tr>
                 `;
@@ -87,7 +87,25 @@ class Commande {
         });
       }
 
-      
+      ExportPDF() {
+        $("body").on("click","#export-data", function(event) {
+            var idCom = $(this).attr("data-id")
+            console.log("DATA-ID : "+idCom)
+            $.ajax({
+                type:"GET",
+                contentType:"application/json;charset=utf-8",
+                url: `http://localhost:8888/api/commande/export/pdf/${idCom}`,
+                success:(response) => {
+                    console.log(response)
+                    Swal.fire("Petite alerte !!","L'exportation est effectuée avec succès !!","success")
+                },
+                error:(err) => {
+                    console.log(err)
+                    Swal.fire("Ouupss !!","Veuillez réessayer s'il vous plait !!","error")
+                }
+            })
+        })
+    }
 
 
 }
@@ -101,6 +119,8 @@ $(function () {
         e.preventDefault();
         commande.searchTable();
     })
+
+    commande.ExportPDF();
 
     
 })

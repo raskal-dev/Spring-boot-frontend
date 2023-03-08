@@ -1,0 +1,193 @@
+.content {
+	font-family: 'Poppins', sans-serif;
+	max-width: 2000px;
+	background: rgb(231, 253, 253);
+}
+header{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.nav{
+	margin-bottom: 30px;
+	margin-top: 35px;
+	position: relative;
+	list-style-type: none;
+	background-color: white;
+	height: 50px;
+	border-radius: 20px;
+	box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important
+
+
+}
+.nav li a{
+	text-decoration: none;
+	color: rgba(0, 0, 0, 0.459);
+	width: 100px;
+	height: 100%;
+	display: inline-grid;
+	place-items: center;
+	font-size: 25px;
+	z-index: 1;
+	position: relative;
+	filter: url("#goo");
+}
+.nav li a .title{
+	display: none;
+	font-size: 16px;
+}
+.nav li a:hover{
+	color: dodgerblue;
+}
+.nav li a.nav-item-active{
+	color: dodgerblue;
+	transform: translateY(-20%);
+	font-size: 35px;
+	transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.nav li a.nav-item-active .title{
+	display: block;
+}
+.nav .nav-indicator{
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background-color: white;
+	position: absolute;
+	top: -25px;
+	left: calc(165px - 50px);
+	transition: left .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card-form{
+	display: inline-block;
+	vertical-align: top;
+	background-color:white;
+	width: 500px;
+	margin: 20px;
+	padding: 40px;
+	border-radius: 1.5em;
+	outline: 0;
+	/*box-shadow: 1px 2px 1px 1px rgba(48, 48, 48, 0.836);*/
+	border: none;
+	box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important
+
+}
+label {
+	margin: 2px 0px 2px 5px;
+}
+.form {
+	width: 400px;
+	padding: 0px 10px;
+	display: block;
+	margin: 1px;
+	/*border-color: rgb(204, 203, 203);*/
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-radius: 0.5em;
+	outline: 0;
+}
+.form1{
+	width: 250px;
+}
+.form2{
+	width: 350px;
+}
+.form3{
+	width: 300px;
+}
+.form4{
+	width: 200px;
+}
+.form:focus{
+	border-color:dodgerblue;
+	color: dodgerblue;
+
+}
+.form:valid{
+	color: dodgerblue;
+}
+.btn{
+	color: dodgerblue;
+	border-radius: 10em;
+	border: 1px solid dodgerblue;
+}
+.btn:hover{
+	background-color: dodgerblue;
+	color: white;
+}
+
+.table {
+	background-color: white;
+	width: auto;
+	border: none;
+	display: inline-block;
+
+	margin: 20px;
+	padding: 10px;
+	border-radius: 1.5em;
+	outline: 0;
+	box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+	vertical-align: top;
+}
+table thead{
+	font-size: 1.3em;
+	border-radius: 12px;
+	color: dodgerblue;
+
+}
+.edit{
+	color: gold;
+	font-size: 22px;
+	margin: 8px;
+}
+.edit:hover{
+
+	color: rgb(216, 184, 3) ;
+}
+.edit{
+	border-color: gold;
+}
+.delete{
+	color: firebrick;
+	font-size: 20px;
+}
+.delete:hover{
+	color: rgb(104, 0, 0);
+}
+.sp{
+	position: absolute;
+	color: white;
+	display: inline-block;
+	padding: 0px 3px;
+	font-size: medium;
+	border-radius: 8px;
+	z-index: 1070;
+	font-size: 12px;
+	filter: alpha(opacity=0);
+	opacity: .0;
+	width: 23px;
+	height: auto;
+}
+.spedit:hover{
+	border: 1px solid gold;
+	background-color: gold;
+	filter: alpha(opacity=90);
+	opacity: .9;
+	margin-left: -20px;
+	margin-top: -22px;
+	width: auto;
+}
+.spdelete:hover{
+	border: 1px solid firebrick;
+	background-color: firebrick;
+	filter: alpha(opacity=90);
+	opacity: .9;
+	margin-left: -20px;
+	margin-top: -22px;
+	width: auto;
+}
+#filter-svg {
+	display: none;
+}

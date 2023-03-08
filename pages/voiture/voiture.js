@@ -27,7 +27,7 @@ class Voiture {
     getVoitureList() {
         $.ajax({
             type : "GET",
-            url : "http://localhost:8888/api/voitures/all",
+            url : "http://localhost:8888/api/voitures/vendu",
             dataType:"json",
             success: function(results){
                 var row = ""
@@ -36,16 +36,16 @@ class Voiture {
                 $.each(results.object, (index, voiture) => {
                         row +=
                             `<tr>
-                                <th>${voiture.id}</th>
-                                <th>${voiture.matricule}</th>
-                                <td>${voiture.mark}</td>
-                                <td>${voiture.type}</td>
-                                <td>${voiture.placeNumber}</td>
-                                <td>${voiture.price}</td>
-                                <td>
-                                    <a class="btn btn-outline-primary btn-sm buy" data-bs-toggle="modal" data-bs-target="#exampleModal" id="buy-data" data-id="${voiture.id}"><i class="fa-solid fa-cart-plus"></i></i></a>
-                                    <a class="btn btn-outline-warning btn-sm edit" id="edit-data" data-id="${voiture.id}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a class="btn btn-outline-danger btn-sm delete" data-id="${voiture.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
+                                <th class="align-middle">${voiture.id}</th>
+                                <th class="align-middle">${voiture.matricule}</th>
+                                <td class="align-middle">${voiture.mark}</td>
+                                <td class="align-middle">${voiture.type}</td>
+                                <td class="align-middle">${voiture.placeNumber}</td>
+                                <td class="align-middle">${voiture.price}</td>
+                                <td class="align-middle">
+                                    <a class="btn btn-outline-primary buy" data-bs-toggle="modal" data-bs-target="#exampleModal" id="buy-data" data-id="${voiture.id}"><i class="fa-solid fa-cart-plus"></i></a>
+                                    <a class="btn btn-outline-warning edit" id="edit-data" data-id="${voiture.id}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a class="btn btn-outline-danger delete" data-id="${voiture.id}" id="delete-data"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>`;
                     });
@@ -132,6 +132,7 @@ class Voiture {
                 url:`http://localhost:8888/api/voitures/byId/${id}`,
                 success:(response) => {
                     console.log(response.object)
+                    $("#idVoiture").val(response.object.id)
                     $("#matriculeVoiture").val(response.object.matricule)
                     $("#marqueVoiture").val(response.object.mark)
                     $("#typeVoiture").val(response.object.type)
@@ -169,7 +170,7 @@ class Voiture {
         })   
     }
 
-    addCommande(data_commande) {
+    addCommande(data_commande, idCar) {
         
         $.ajax({
             type:"POST",
@@ -179,11 +180,35 @@ class Voiture {
             dataType:"json",
             success:(response) => {
                 console.log("RESPONSE : "+response)
-                Swal.fire("Petite alerte !!","Commande avec succès !!","success").then(() => {
-                    window.location.reload()    
-                })
-                this.getVoitureList();
-                $("#form-ajout-commande")[0].reset();
+
+                $('#exampleModal').modal('hide');
+
+                $.ajax({
+                    type:"PUT",
+                    contentType:"application/json;charset=utf-8",
+                    url:`http://localhost:8888/api/voitures/update/${idCar}`,
+                    data: JSON.stringify(
+                        { 
+                            matricule: $("#matriculeVoiture").val(),
+                            mark: $("#marqueVoiture").val(),
+                            type:$("#typeVoiture").val(),
+                            placeNumber: $("#nbPlaceVoiture").val(),
+                            price: $("#priceVoiture").val(),
+                            vendu: true 
+                        
+                        }),
+                    dataType:"json",
+                    success:(response) => {
+                        console.log("RESPONSE : "+response)
+                        Swal.fire("Petite alerte !!","Modification avec succès !!","success")
+                        this.getVoitureList()
+                        $("#form-ajout-car")[0].reset();
+                    },
+                    error:(err) => {
+                        console.log("ERROR : "+err)
+                        Swal.fire("Ouupss !!","Veuillez réessayer s'il vous plait !!","error")
+                    }
+                });
             },
             error:(err) => {
                 console.log("ERROR : "+err)
@@ -199,7 +224,7 @@ class Voiture {
             Swal.fire({
                 title:"Confirmation ...",
                 text:"Voulez-vous vraiment supprimer cette Étudiant ?",
-                icon:"warning",
+                icon:"question",
                 showCancelButton:true,
                 confirmButtonColor:"#3085d6",
                 cancelButtonColor:"#d33",
@@ -267,7 +292,9 @@ $(function () {
 
     $("#btn-buy").on("click",(event) => {
         event.preventDefault()
+        let id_V = $("#idVoiture").val();
         var dataFormCom = {        
+            // commande
             nomCli: $("#nomCli").val(),
             numCli: $("#numCli").val(),
             matriculeVoiture: $("#matriculeVoiture").val(),
@@ -276,7 +303,7 @@ $(function () {
             nbPlaceVoiture: $("#nbPlaceVoiture").val(),
             priceVoiture: $("#priceVoiture").val()
         }
-        voiture.addCommande(dataFormCom);
+        voiture.addCommande(dataFormCom, id_V);
     })
 
     $('#form-ajout-car').on("submit", (event) => {
